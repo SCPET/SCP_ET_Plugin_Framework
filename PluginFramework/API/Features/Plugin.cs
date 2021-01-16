@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using PluginFramework.API.Interfaces;
+using PluginFramework.Enums;
 
 namespace PluginFramework.API.Features
 {
@@ -64,12 +65,5 @@ namespace PluginFramework.API.Features
         public int CompareTo(Plugin<Config> other) => -Priority.CompareTo(other.Priority);
     }
 
-    public enum PluginPriority
-    {
-        Highest = int.MaxValue-1,
-        High = 1000,
-        Normal = 0,
-        Low = -1000,
-        Lowest = int.MinValue+1
-    }
+
 }
