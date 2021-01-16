@@ -10,7 +10,7 @@ namespace PluginFramework.Plugins
     public static class PluginLoader
     {
         public static List<string> loadedDependencies = new List<string>();
-        public static Dictionary<string, Plugin<IConfig>> loadedPlugins = new Dictionary<string, Plugin<IConfig>>();
+        public static Dictionary<string, Plugin<Config>> loadedPlugins = new Dictionary<string, Plugin<Config>>();
         
         public static void LoadPlugins(string pluginsDirectory)
         {
@@ -88,7 +88,7 @@ namespace PluginFramework.Plugins
                     {
                         if (type.IsSubclassOf(typeof(Plugin)) && type != typeof(Plugin))
                         {
-                            var plugin = (Plugin<IConfig>) Activator.CreateInstance(type);
+                            var plugin = (Plugin<Config>) Activator.CreateInstance(type);
                             
                             plugin.Config = ConfigManager.AddConfig(plugin.Name, Activator.CreateInstance(plugin.Config.GetType()));
                             plugin.OnEnabled();

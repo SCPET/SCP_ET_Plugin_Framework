@@ -4,7 +4,11 @@ using PluginFramework.API.Interfaces;
 
 namespace PluginFramework.API.Features
 {
-    public class Plugin<T> where T : IConfig, new()
+    /// <summary>
+    /// The plugin class.
+    /// </summary>
+    /// <typeparam name="T">The plugin's config.</typeparam>
+    public class Plugin<T> where T : Config, new()
     {
         /// <summary>
         /// The plugin's assembly.

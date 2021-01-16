@@ -8,9 +8,9 @@ namespace PluginFramework.Plugins
 {
     internal static class ConfigManager
     {
-        internal static IConfig AddConfig(string name, object configType)
+        internal static Config AddConfig(string name, object configType)
         {
-            IConfig config;
+            Config config;
             
             var str = Path.Combine(Application.dataPath, "../settings/plugins/"+name.Replace(".", "").Replace("/", "").Replace("\\", "")+".json");
             if (!File.Exists(str))
@@ -20,18 +20,18 @@ namespace PluginFramework.Plugins
             }
             try
             {
-                config = (IConfig) JsonConvert.DeserializeObject(File.ReadAllText(str));
+                config = (Config) JsonConvert.DeserializeObject(File.ReadAllText(str));
             }
             catch (NullReferenceException)
             {
                 File.WriteAllText(str, JsonConvert.SerializeObject(configType, Formatting.Indented));
-                config = (IConfig) configType;
+                config = (Config) configType;
             }
             catch (JsonException)
             {
                 File.Move(str, Path.Combine(Application.dataPath, "../settings/plugins/INVALID-"+name.Replace(".", "").Replace("/", "").Replace("\\", "")+".json"));
                 File.WriteAllText(str, JsonConvert.SerializeObject(configType, Formatting.Indented));
-                config = (IConfig) configType;
+                config = (Config) configType;
             }
 
             return config;
