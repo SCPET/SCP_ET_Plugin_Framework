@@ -12,6 +12,8 @@
         PlayerClassChangeEvent,
         ItemPickupEvent,
         ItemDropEvent,
-        CleanRoomActivateEvent
+        CleanRoomActivateEvent,
+        RoundEndEvent,
+        DoorToggleEvent
     }
 }
