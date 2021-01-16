@@ -12,6 +12,8 @@ namespace PluginFramework.Plugins
         public static List<string> loadedDependencies = new List<string>();
         public static Dictionary<string, Plugin<Config>> loadedPlugins = new Dictionary<string, Plugin<Config>>();
         
+        private static List<Plugin<Config>> tempPlugins = new List<Plugin<Config>>();
+        
         public static void LoadPlugins(string pluginsDirectory)
         {
             var files = Directory.GetFiles(Path.Combine(pluginsDirectory, "dependencies"));
@@ -34,6 +36,8 @@ namespace PluginFramework.Plugins
                 LoadPlugin(num, files2.Length, path2);
                 num++;
             }
+
+            EnablePlugins();
         }
 
         private static void LoadDependency(int index, int count, string path)
@@ -86,26 +90,15 @@ namespace PluginFramework.Plugins
                 {
                     foreach (var type in assembly.GetTypes())
                     {
-                        if (type.IsSubclassOf(typeof(Plugin)) && type != typeof(Plugin))
-                        {
-                            var plugin = (Plugin<Config>) Activator.CreateInstance(type);
+                        if (!type.IsSubclassOf(typeof(Plugin)) || type == typeof(Plugin)) continue;
+                        
+                        var plugin = (Plugin<Config>) Activator.CreateInstance(type);
                             
-                            plugin.Config = ConfigManager.AddConfig(plugin.Name, Activator.CreateInstance(plugin.Config.GetType()));
-                            plugin.OnEnabled();
+                        plugin.Config = ConfigManager.AddConfig(plugin.Name, Activator.CreateInstance(plugin.Config.GetType()));
+                        plugin.File = fileName;
+                        plugin.Assembly = assembly;
                             
-                            loadedPlugins.Add(fileName, plugin);
-                            
-                            Logger.Info("PS", string.Concat(new object[]
-                            {
-                                "Plugin ",
-                                fileName,
-                                " loaded. (",
-                                index,
-                                "/",
-                                count,
-                                ")"
-                            }));
-                        }
+                        tempPlugins.Add(plugin);
                     }
                 }
                 catch (Exception ex)
@@ -137,6 +130,67 @@ namespace PluginFramework.Plugins
                     ")"
                 }));
             }
+        }
+
+        private static void EnablePlugins()
+        {
+            tempPlugins.Sort();
+            
+            for (var i = 0; i < tempPlugins.Count; i++)
+            {
+                var plugin = tempPlugins[i];
+                
+                loadedPlugins.Add(plugin.File, plugin);
+                
+                plugin.Enable();
+
+                Logger.Info("PS", string.Concat(new object[]
+                {
+                    "Plugin ",
+                    plugin.File,
+                    " loaded. (",
+                    i+1,
+                    "/",
+                    tempPlugins.Count,
+                    ")"
+                }));
+            }
+
+            tempPlugins.Clear();
+        }
+
+        public static void Enable(this Plugin<Config> plugin)
+        {
+            foreach (var type in plugin.Assembly.GetTypes())
+            {
+                foreach (var methodInfo in type.GetMethods())
+                {
+                    var customAttribute = methodInfo.GetCustomAttribute<EventAttribute>();
+                    if (customAttribute == null) continue;
+                    
+                    var eventInfo = Events.Events.GetEvent(customAttribute.EventType);
+                    eventInfo.AddEventHandler(null, Delegate.CreateDelegate(eventInfo.EventHandlerType, methodInfo));
+                }
+            }
+
+            plugin.OnEnabled();
+        }
+
+        public static void Disable(this Plugin<Config> plugin)
+        {
+            foreach (var type in plugin.Assembly.GetTypes())
+            {
+                foreach (var methodInfo in type.GetMethods())
+                {
+                    var customAttribute = methodInfo.GetCustomAttribute<EventAttribute>();
+                    if (customAttribute == null) continue;
+                    
+                    var eventInfo = Events.Events.GetEvent(customAttribute.EventType);
+                    eventInfo.RemoveEventHandler(null, Delegate.CreateDelegate(eventInfo.EventHandlerType, methodInfo));
+                }
+            }
+
+            plugin.OnDisabled();
         }
     }
 }
