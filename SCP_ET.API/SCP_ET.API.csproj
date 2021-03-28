@@ -85,8 +85,6 @@
     <Compile Include="Events\EventsArgs\PlayerPreJoinEvent.cs" />
     <Compile Include="Events\EventsArgs\RoundEndEvent.cs" />
     <Compile Include="Events\EventManager.cs" />
-    <Compile Include="Events\PlayerEvents.cs" />
-    <Compile Include="Events\WorldEvents.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Interfaces\IAdminCommand.cs" />
     <Compile Include="Interfaces\IChatCommand.cs" />
