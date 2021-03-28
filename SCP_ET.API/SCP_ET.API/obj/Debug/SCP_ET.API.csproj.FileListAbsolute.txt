@@ -1,0 +1,8 @@
+W:\SCP_ET.API\SCP_ET.API\SCP_ET.API\obj\Debug\SCP_ET.API.csproj.CoreCompileInputs.cache
+W:\SCP_ET.API\SCP_ET.API\SCP_ET.API\bin\Debug\SCP_ET.API.dll
+W:\SCP_ET.API\SCP_ET.API\SCP_ET.API\bin\Debug\SCP_ET.API.pdb
+W:\SCP_ET.API\SCP_ET.API\SCP_ET.API\bin\Debug\Newtonsoft.Json.dll
+W:\SCP_ET.API\SCP_ET.API\SCP_ET.API\bin\Debug\Newtonsoft.Json.xml
+W:\SCP_ET.API\SCP_ET.API\SCP_ET.API\obj\Debug\SCP_ET.API.csproj.CopyComplete
+W:\SCP_ET.API\SCP_ET.API\SCP_ET.API\obj\Debug\SCP_ET.API.dll
+W:\SCP_ET.API\SCP_ET.API\SCP_ET.API\obj\Debug\SCP_ET.API.pdb
