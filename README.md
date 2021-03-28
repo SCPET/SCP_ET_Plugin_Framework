@@ -1,1 +1,1 @@
-# SCP_ET_Plugin_Framework
+# SCP_ET.API
