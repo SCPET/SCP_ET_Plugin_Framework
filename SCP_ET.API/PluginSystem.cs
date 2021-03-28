@@ -24,6 +24,11 @@ namespace SCP_ET.API
             singleton = this;
         }
 
+        public delegate void CustomEventHandler<TEventArgs>(TEventArgs ev)
+            where TEventArgs : System.EventArgs;
+
+        public delegate void CustomEventHandler();
+
         public static Dictionary<string, List<MethodInfo>> pluginsMethods = new Dictionary<string, List<MethodInfo>>();
 
         public static Dictionary<Assembly, string> Locations { get; set; } = new Dictionary<Assembly, string>();

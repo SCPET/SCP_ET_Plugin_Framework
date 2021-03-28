@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SCP_ET.API.Logging;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using static SCP_ET.API.PluginSystem;
 
 namespace SCP_ET.API.Extensions
 {
@@ -67,6 +69,51 @@ namespace SCP_ET.API.Extensions
             }
 
             return str;
+        }
+
+        public static void InvokeSafely<T>(this CustomEventHandler<T> ev, T arg)
+where T : EventArgs
+        {
+            if (ev == null)
+                return;
+
+            var eventName = ev.GetType().FullName;
+            foreach (CustomEventHandler<T> handler in ev.GetInvocationList())
+            {
+                try
+                {
+                    handler(arg);
+                }
+                catch (Exception ex)
+                {
+                    LogException(ex, handler.Method.Name, handler.Method.ReflectedType.FullName, eventName);
+                }
+            }
+        }
+
+        public static void InvokeSafely(this CustomEventHandler ev)
+        {
+            if (ev == null)
+                return;
+
+            string eventName = ev.GetType().FullName;
+            foreach (CustomEventHandler handler in ev.GetInvocationList())
+            {
+                try
+                {
+                    handler();
+                }
+                catch (Exception ex)
+                {
+                    LogException(ex, handler.Method.Name, handler.Method.ReflectedType?.FullName, eventName);
+                }
+            }
+        }
+
+        private static void LogException(Exception ex, string methodName, string sourceClassName, string eventName)
+        {
+            Log.Error($"Method \"{methodName}\" of the class \"{sourceClassName}\" caused an exception when handling the event \"{eventName}\"");
+            Log.Error(ex);
         }
     }
 }

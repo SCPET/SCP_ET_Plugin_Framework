@@ -1,10 +1,12 @@
 ﻿using SCP_ET.API.Events.EventsArgs;
+using SCP_ET.API.Extensions;
 using SCP_ET.API.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SCP_ET.API.PluginSystem;
 
 namespace SCP_ET.API.Events
 {
@@ -14,54 +16,46 @@ namespace SCP_ET.API.Events
 
         #region Player Events
 
-        public delegate void PlayerDeath(PlayerDeathEvent ev);
-        public static event PlayerDeath PlayerDeathEvent;
+        public static event CustomEventHandler<PlayerDeathEvent> PlayerDeath;
+        public static void OnPlayerDeath(PlayerDeathEvent ev) => PlayerDeath.InvokeSafely(ev);
 
-        public delegate void PlayerPreJoin(PlayerPreJoinEvent ev);
-        public static event PlayerPreJoin PlayerPreJoinEvent;
+        public static event CustomEventHandler<PlayerPreJoinEvent> PlayerPreJoin;
+        public static void OnPlayerPreJoin(PlayerPreJoinEvent ev) => PlayerPreJoin.InvokeSafely(ev);
 
-        public delegate void PlayerJoinFinal(PlayerJoinFinalEvent ev);
-        public static event PlayerJoinFinal PlayerJoinFinalEvent;
+        public static event CustomEventHandler<PlayerJoinFinalEvent> PlayerJoinFinal;
+        public static void OnPlayerJoinFinal(PlayerJoinFinalEvent ev) => PlayerJoinFinal.InvokeSafely(ev);
 
-        public delegate void PlayerLeave(PlayerLeaveEvent ev);
-        public static event PlayerLeave PlayerLeaveEvent;
+        public static event CustomEventHandler<PlayerLeaveEvent> PlayerLeave;
+        public static void OnPlayerLeave(PlayerLeaveEvent ev) => PlayerLeave.InvokeSafely(ev);
 
-        public delegate void PlayerDamage(PlayerDamageEvent ev);
-        public static event PlayerDamage PlayerDamageEvent;
+        public static event CustomEventHandler<PlayerDamageEvent> PlayerDamage;
+        public static void OnPlayerDamage(PlayerDamageEvent ev) => PlayerDamage.InvokeSafely(ev);
 
-        public delegate void PlayerEffect(PlayerEffectEvent ev);
-        public static event PlayerEffect PlayerEffectEvent;
+        public static event CustomEventHandler<PlayerEffectEvent> PlayerEffect;
+        public static void OnPlayerEffect(PlayerEffectEvent ev) => PlayerEffect.InvokeSafely(ev);
 
-        public delegate void PlayerAuth(PlayerAuthEvent ev);
-        public static event PlayerAuth PlayerAuthEvent;
+        public static event CustomEventHandler<PlayerAuthEvent> PlayerAuth;
+        public static void OnPlayerAuth(PlayerAuthEvent ev) => PlayerAuth.InvokeSafely(ev);
 
-        public delegate void PlayerClassChange(PlayerClassChangeEvent ev);
-        public static event PlayerClassChange PlayerClassChangeEvent;
+        public static event CustomEventHandler<PlayerClassChangeEvent> PlayerClassChange;
+        public static void OnPlayerClassChange(PlayerClassChangeEvent ev) => PlayerClassChange.InvokeSafely(ev);
 
-        public delegate void ItemPickup(ItemPickupEvent ev);
-        public static event ItemPickup ItemPickupEvent;
+        public static event CustomEventHandler<ItemPickupEvent> ItemPickup;
+        public static void OnItemPickup(ItemPickupEvent ev) => ItemPickup.InvokeSafely(ev);
 
-        public delegate void ItemDrop(ItemDropEvent ev);
-        public static event ItemDrop ItemDropEvent;
+        public static event CustomEventHandler<ItemDropEvent> ItemDrop;
+        public static void OnItemDrop(ItemDropEvent ev) => ItemDrop.InvokeSafely(ev);
 
-        public delegate void CleanRoomActivate(CleanRoomActivateEvent ev);
-        public static event CleanRoomActivate CleanRoomActivateEvent;
+        public static event CustomEventHandler<CleanRoomActivateEvent> CleanRoomActivate;
+        public static void OnCleanRoomActivate(CleanRoomActivateEvent ev) => CleanRoomActivate.InvokeSafely(ev);
 
-        public delegate void PlayerMissionModified(PlayerMissionModifiedEvent ev);
-        public static event PlayerMissionModified PlayerMissionModifiedEvent;
+        public static event CustomEventHandler<PlayerMissionModifiedEvent> PlayerMissionModified;
+        public static void OnPlayerMissionModified(PlayerMissionModifiedEvent ev) => PlayerMissionModified.InvokeSafely(ev);
         #endregion
 
         #region World Events
-
-        public delegate void RoundEnd(RoundEndEvent ev);
-        public static event RoundEnd RoundEndEvent;
-
-        public delegate void RoundStart();
-        public static event RoundStart RoundStartEvent;
-
-        public delegate void RoundRestart();
-        public static event RoundRestart RoundRestartEvent;
-
+        public static event CustomEventHandler<RoundEndEvent> RoundEnd;
+        public static void OnRoundEnd(RoundEndEvent ev) => RoundEnd.InvokeSafely(ev);
         #endregion
     }
 }
