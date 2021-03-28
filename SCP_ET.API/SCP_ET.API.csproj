@@ -86,6 +86,7 @@
     <Compile Include="Events\EventsArgs\RoundEndEvent.cs" />
     <Compile Include="Events\EventManager.cs" />
     <Compile Include="Events\EventsArgs\RoundRestartEvent.cs" />
+    <Compile Include="Events\EventsArgs\RoundStartEvent.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Interfaces\IAdminCommand.cs" />
     <Compile Include="Interfaces\IChatCommand.cs" />

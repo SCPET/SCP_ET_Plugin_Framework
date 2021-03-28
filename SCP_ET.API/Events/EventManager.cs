@@ -59,6 +59,9 @@ namespace SCP_ET.API.Events
 
         public static event CustomEventHandler<RoundRestartEvent> RoundRestart;
         public static void OnRoundRestart(RoundRestartEvent ev) => RoundRestart.InvokeSafely(ev);
+
+        public static event CustomEventHandler<RoundStartEvent> RoundStart;
+        public static void OnRoundStart(RoundStartEvent ev) => RoundStart.InvokeSafely(ev);
         #endregion
     }
 }
