@@ -50,6 +50,7 @@
     <Compile Include="Attributes\ConsoleCommand.cs" />
     <Compile Include="Attributes\PlayerEvent.cs" />
     <Compile Include="Attributes\WorldEvent.cs" />
+    <Compile Include="Classes\CustomDataStorage.cs" />
     <Compile Include="Classes\Door.cs" />
     <Compile Include="Classes\Effect.cs" />
     <Compile Include="Classes\Item.cs" />

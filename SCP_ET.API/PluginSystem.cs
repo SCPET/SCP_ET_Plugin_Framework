@@ -112,8 +112,6 @@ namespace SCP_ET.API
             }
         }
 
-        public static Dictionary<string, List<MethodInfo>> plugins = new Dictionary<string, List<MethodInfo>>();
-
         #endregion
 
 

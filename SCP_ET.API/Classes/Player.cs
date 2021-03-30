@@ -5,8 +5,9 @@ using System.Collections.Generic;
 
 namespace SCP_ET.API.Classes
 {
-    public abstract class Player : IEntity
+    public abstract class Player : IEntity, IDisposable
     {
+        public CustomDataStorage CustomDataStorage { get; } = new CustomDataStorage();
         public static List<Player> Players { get; set; } = new List<Player>();
         public abstract Vector Position { get; set; }
         public abstract object GameObject { get; }
@@ -77,5 +78,10 @@ namespace SCP_ET.API.Classes
         public abstract void PlaceDecal(DecalType decal, float size, bool sound = true);
         public abstract void BanPlayer(string reason, TimeSpan duration);
         public abstract void Disconnect(string reason, bool isTranslated = false, TextType translationType = TextType.Common);
+
+        public void Dispose()
+        {
+            CustomDataStorage.Dispose();
+        }
     }
 }
