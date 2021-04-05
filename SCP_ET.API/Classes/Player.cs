@@ -7,10 +7,14 @@ namespace SCP_ET.API.Classes
 {
     public abstract class Player : IEntity, IDisposable
     {
+        public abstract DimensionType CurrentDimension { get; set; }
         public CustomDataStorage CustomDataStorage { get; } = new CustomDataStorage();
         public static List<Player> Players { get; set; } = new List<Player>();
+        public abstract void OnDestroy();
+        public abstract bool IsValidTarget { get; }
         public abstract Vector Position { get; set; }
-        public abstract object GameObject { get; }
+        public abstract Vector Rotation { get; set; }
+        public abstract object GameObject { get; set; }
         public abstract int ClassID { get; set; }
         public abstract object PlayerController { get; }
         public abstract object Effects { get; }
@@ -56,7 +60,6 @@ namespace SCP_ET.API.Classes
         public abstract object Weapon { get; }
         public abstract string CurrentZone { get; set; }
         public abstract object ClassMeshPrefab { get; set; }
-        public abstract DimensionType CurrentDimension { get; set; }
         public abstract void TakeDamage(float dmgAmount, IEntity damager, DeathTypes deathType);
         public abstract void ClearDropInventory();
         public abstract void ClearItems();

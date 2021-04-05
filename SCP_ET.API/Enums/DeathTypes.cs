@@ -25,5 +25,6 @@ namespace SCP_ET.API.Enums
         Bleeding,
         SCP035,
         CardiacArrest,
+        Fire,
     }
 }

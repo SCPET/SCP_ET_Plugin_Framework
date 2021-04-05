@@ -9,6 +9,7 @@ namespace SCP_ET.API.Enums
         Scp1499,
         Pocket,
         Scp1123,
-        Scp860
+        Scp860,
+        Cutscene
     }
 }
