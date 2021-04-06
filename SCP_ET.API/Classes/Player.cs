@@ -71,6 +71,7 @@ namespace SCP_ET.API.Classes
         public abstract object Weapon { get; }
         public abstract string CurrentZone { get; set; }
         public abstract object ClassMeshPrefab { get; set; }
+        public abstract bool UsedCheatCommand { get; set; }
         public abstract MissionInfo GetMission(string missionName, MissionInfo replace);
         public abstract void AddMissionServer(MissionInfo? mission, bool Completed);
         public abstract void ClearDropInventory();
