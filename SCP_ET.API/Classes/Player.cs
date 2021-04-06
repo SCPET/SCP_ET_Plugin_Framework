@@ -13,7 +13,6 @@ namespace SCP_ET.API.Classes
         public abstract DimensionType CurrentDimension { get; set; }
         public CustomDataStorage CustomDataStorage { get; } = new CustomDataStorage();
         public static List<Player> Players { get; set; } = new List<Player>();
-
         public event PluginSystem.CustomEventHandler<EntityTakeDamageEvent> EntityTakeDamage;
         public event PluginSystem.CustomEventHandler<EntityKillEvent> EntityKill;
         public void OnEntityTakeDamage(EntityTakeDamageEvent ev) => EntityTakeDamage.InvokeSafely(ev);
