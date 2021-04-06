@@ -60,11 +60,13 @@
     <Compile Include="Classes\Door.cs" />
     <Compile Include="Classes\Effect.cs" />
     <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\KillTrigger.cs" />
     <Compile Include="Classes\Npc.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\PluginPriorityComparer.cs" />
     <Compile Include="Classes\Position.cs" />
     <Compile Include="Classes\SCP.cs" />
+    <Compile Include="Classes\Tesla.cs" />
     <Compile Include="Commands\AdminChatCommandHandler.cs" />
     <Compile Include="Commands\CommandResponse.cs" />
     <Compile Include="Commands\ConsoleCommandHandler.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Interfaces\IChatCommand.cs" />
     <Compile Include="Interfaces\IConfig.cs" />
     <Compile Include="Interfaces\IConsoleCommand.cs" />
+    <Compile Include="Interfaces\IDamagable.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
     <Compile Include="Interfaces\IEntityReference.cs" />
     <Compile Include="Interfaces\INpc.cs" />
