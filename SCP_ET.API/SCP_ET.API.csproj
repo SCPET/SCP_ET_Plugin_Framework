@@ -35,7 +35,13 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +60,7 @@
     <Compile Include="Classes\Door.cs" />
     <Compile Include="Classes\Effect.cs" />
     <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\Npc.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\PluginPriorityComparer.cs" />
     <Compile Include="Classes\Position.cs" />
@@ -89,12 +96,18 @@
     <Compile Include="Events\EventsArgs\RoundRestartEvent.cs" />
     <Compile Include="Events\EventsArgs\RoundStartEvent.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Interfaces\EventsArgs\EntityKillEvent.cs" />
+    <Compile Include="Interfaces\EventsArgs\EntityTakeDamageEvent.cs" />
     <Compile Include="Interfaces\IAdminCommand.cs" />
     <Compile Include="Interfaces\IChatCommand.cs" />
     <Compile Include="Interfaces\IConfig.cs" />
     <Compile Include="Interfaces\IConsoleCommand.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="Interfaces\IEntityReference.cs" />
+    <Compile Include="Interfaces\INpc.cs" />
+    <Compile Include="Interfaces\IPlayer.cs" />
     <Compile Include="Interfaces\IPlugin.cs" />
+    <Compile Include="Interfaces\IScp.cs" />
     <Compile Include="Interfaces\IScript.cs" />
     <Compile Include="Interfaces\ItemMelee.cs" />
     <Compile Include="Interfaces\ItemWeapon.cs" />
@@ -103,6 +116,7 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structs\MissionInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

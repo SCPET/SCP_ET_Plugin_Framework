@@ -2,11 +2,15 @@
 using SCP_ET.API.Extensions;
 using SCP_ET.API.Interfaces;
 using SCP_ET.API.Interfaces.EventsArgs;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SCP_ET.API.Classes
 {
-    public abstract class SCP : IEntity
+    public abstract class Npc : IEntity
     {
         public event PluginSystem.CustomEventHandler<EntityTakeDamageEvent> EntityTakeDamage;
         public event PluginSystem.CustomEventHandler<EntityKillEvent> EntityKill;
@@ -14,12 +18,12 @@ namespace SCP_ET.API.Classes
         public void OnEntityKill(EntityKillEvent ev) => EntityKill.InvokeSafely(ev);
 
         public abstract DimensionType CurrentDimension { get; set; }
-        public static List<SCP> Scps { get; set; } = new List<SCP>();
+        public static List<Npc> Npcs { get; set; } = new List<Npc>();
         public abstract bool IsPlayer { get; }
         public abstract bool IsScp { get; }
         public abstract bool IsNpc { get; }
         public abstract bool IsValidTarget { get; }
-        public abstract object ScpController { get; }
+        public abstract object NpcController { get; }
         public abstract object GameObject { get; }
         public abstract void TakeDamage(float dmgAmount, IEntity damager, DeathTypes deathType);
         public abstract void KillEntity();
@@ -27,6 +31,6 @@ namespace SCP_ET.API.Classes
         public abstract void OnDestroy();
         public abstract Vector Position { get; set; }
         public abstract Vector Rotation { get; set; }
-        public abstract string ScpName { get; }
+        public abstract string NpcName { get; }
     }
 }

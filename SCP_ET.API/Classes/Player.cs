@@ -1,5 +1,8 @@
 ﻿using SCP_ET.API.Enums;
+using SCP_ET.API.Extensions;
 using SCP_ET.API.Interfaces;
+using SCP_ET.API.Interfaces.EventsArgs;
+using SCP_ET.API.Structs;
 using System;
 using System.Collections.Generic;
 
@@ -10,11 +13,19 @@ namespace SCP_ET.API.Classes
         public abstract DimensionType CurrentDimension { get; set; }
         public CustomDataStorage CustomDataStorage { get; } = new CustomDataStorage();
         public static List<Player> Players { get; set; } = new List<Player>();
+
+        public event PluginSystem.CustomEventHandler<EntityTakeDamageEvent> EntityTakeDamage;
+        public event PluginSystem.CustomEventHandler<EntityKillEvent> EntityKill;
+        public void OnEntityTakeDamage(EntityTakeDamageEvent ev) => EntityTakeDamage.InvokeSafely(ev);
+        public void OnEntityKill(EntityKillEvent ev) => EntityKill.InvokeSafely(ev);
+        public abstract bool IsPlayer { get; }
+        public abstract bool IsScp { get; }
+        public abstract bool IsNpc { get; }
         public abstract void OnDestroy();
         public abstract bool IsValidTarget { get; }
         public abstract Vector Position { get; set; }
         public abstract Vector Rotation { get; set; }
-        public abstract object GameObject { get; set; }
+        public abstract object GameObject { get; }
         public abstract int ClassID { get; set; }
         public abstract object PlayerController { get; }
         public abstract object Effects { get; }
@@ -60,7 +71,8 @@ namespace SCP_ET.API.Classes
         public abstract object Weapon { get; }
         public abstract string CurrentZone { get; set; }
         public abstract object ClassMeshPrefab { get; set; }
-        public abstract void TakeDamage(float dmgAmount, IEntity damager, DeathTypes deathType);
+        public abstract MissionInfo GetMission(string missionName, MissionInfo replace);
+        public abstract void AddMissionServer(MissionInfo? mission, bool Completed);
         public abstract void ClearDropInventory();
         public abstract void ClearItems();
         public abstract void ClientChangeClass(int oldClass, int newClass);
@@ -68,9 +80,9 @@ namespace SCP_ET.API.Classes
         public abstract void SendTextChatMessage(string message, string color);
         public abstract void SendTranslatedTextChatMessage(string message, string color, int textType);
         public abstract void SendTranslatedTextChatMessageArgs(string message, string color, int textType, string argString);
-        public abstract void KillPlayer();
-        public abstract void KillPlayer(DeathTypes deathType, IEntity killer);
-        public abstract void ShowStatus(string statusName);
+        public abstract void TakeDamage(float dmgAmount, IEntity damager, DeathTypes deathType);
+        public abstract void KillEntity();
+        public abstract void KillEntity(DeathTypes deathType, IEntity killer); public abstract void ShowStatus(string statusName);
         public abstract void DenyAccessSound(int id);
         public abstract void NewMission(string text);
         public abstract void HealPlayer(float healAmount, float healMax);
