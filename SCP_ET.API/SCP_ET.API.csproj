@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\AdminCommand.cs" />
-    <Compile Include="Attributes\AdminCommand.cs" />
     <Compile Include="Attributes\ChatCommand.cs" />
     <Compile Include="Attributes\ConsoleCommand.cs" />
     <Compile Include="Attributes\PlayerEvent.cs" />
